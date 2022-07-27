@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { getTrendingMovies } from 'api/api';
 import { useState, useEffect } from 'react';
-import { PopularFilms } from 'components/PopularFilms/PopularFilms';
+import { TrendingFilms } from 'components/TrendingFilms/TrendingFilms';
 
 const Title = styled.h1`
   font-size: 1.5em;
@@ -30,7 +30,7 @@ export const Home = () => {
   return (
     <div>
       <Title>Trending movies</Title>
-      <PopularFilms films={films} />
+      <TrendingFilms films={films} />
     </div>
   );
 };

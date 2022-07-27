@@ -52,26 +52,6 @@ export const MovieDetals = () => {
           <li>Reviews</li>
         </ul>
       </div>
-
-      {/* {movie && (
-        <div>
-          <h1>{title}</h1>
-          <img src={imageUrlPath} alt="" />
-          <p>
-            <b>User Score</b> {vote_average * 10}%
-          </p>
-          <p>
-            <b>Overview</b> {overview}
-          </p>
-
-          <b> Genres </b>
-          <ul>
-            {genres.map(genre => (
-              <li key={genre.id}>{genre.name}</li>
-            ))}
-          </ul>
-        </div>
-      )} */}
     </div>
   );
 };
