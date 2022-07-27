@@ -1,14 +1,7 @@
 import styled from 'styled-components';
-import { NavLink, Link } from 'react-router-dom';
-
-const Header = styled.header`
-  font-size: 1.5em;
-  text-align: center;
-  color: red;
-  background-color: antiquewhite;
-  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
-    0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
-`;
+import { getTrendingMovies } from 'api/api';
+import { useState, useEffect } from 'react';
+import { PopularFilms } from 'components/PopularFilms/PopularFilms';
 
 const Title = styled.h1`
   font-size: 1.5em;
@@ -16,48 +9,28 @@ const Title = styled.h1`
   color: palevioletred;
 `;
 
-const List = styled.ul`
-  list-style: none;
-`;
-
-const Item = styled.li`
-  font-size: 1.2em;
-  text-align: center;
-  color: #000000;
-`;
-
-const StyledLink = styled(NavLink)`
-  font-size: 1.2em;
-  text-align: center;
-
-  margin-right: 20px;
-
-  &.active {
-    color: blue;
-    background-color: green;
-  }
-
-  :hover:not(.active),
-  :focus-visible:not(.active) {
-    color: pink;
-  }
-`;
+// Здесь должен идти запрос и рендериться список популярных фильмов
 
 export const Home = () => {
+  const [films, setFilms] = useState([]);
+
+  useEffect(() => {
+    try {
+      async function fetchImages() {
+        const data = await getTrendingMovies();
+        setFilms(data);
+        console.log(data);
+      }
+      fetchImages();
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
   return (
     <div>
-      <Header>
-        <nav>
-          <StyledLink to="/">HOME</StyledLink>
-          <Link to="/movies">MOVIES</Link>
-        </nav>
-      </Header>
       <Title>Trending movies</Title>
-      <List>
-        <Item>Film 1</Item>
-        <Item>Film 2</Item>
-        <Item>Film 3</Item>
-      </List>
+      <PopularFilms films={films} />
     </div>
   );
 };

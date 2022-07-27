@@ -1,22 +1,29 @@
 import { Routes, Route } from 'react-router-dom';
-import { Home } from 'components/Home/Home';
+import { Layout } from 'components/Layout/Layout';
 import { Movies } from 'pages/Movies/Movies';
+import { Home } from 'pages/Home/Home';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { MovieDetals } from 'pages/MovieDetals/MovieDetals';
 
 export const App = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Home />}>
+        <Route path="/" element={<Layout />}>
+          <Route path="/" element={<Home />} />
           <Route path="movies" element={<Movies />}>
-            <Route path="movies/:moviesId" element={<MovieDetals />}></Route>
+            {/* <Route path=":movieId" element={<MovieDetals />} /> */}
           </Route>
+          <Route path="movies/:movieId" element={<MovieDetals />} />
         </Route>
       </Routes>
-      {/* <Layout /> */}
+      <ToastContainer autoClose={3000} />
     </>
   );
 };
+
+/* <Route path="movies/:moviesId" element={<MovieDetals />}></Route> */
 
 // /trending/get-trending список самых популярных фильмов на сегодня для создания коллекции на главной странице.
 // /search/search-movies поиск кинофильма по ключевому слову на странице фильмов.
