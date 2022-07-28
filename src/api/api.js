@@ -37,6 +37,28 @@ export const getMovieById = async movieId => {
   // .find(movie => movie.id === movieId)
 };
 
+export const getCast = async movieId => {
+  const response = await axios.get(`/movie/${movieId}/credits`, {
+    params: {
+      api_key: API_KEY,
+      language: 'en-US',
+    },
+  });
+  // console.log(response);
+  return response.data.cast;
+};
+
+export const getReviews = async movieId => {
+  const response = await axios.get(`/movie/${movieId}/reviews`, {
+    params: {
+      api_key: API_KEY,
+      language: 'en-US',
+    },
+  });
+  // console.log(response);
+  return response.data.results;
+};
+
 // const requestPopularFilms =
 //   'https://api.themoviedb.org/3/movie/popular?api_key=1d1120e9d6d730509fa5db5176245d73&language=en-US&page=1';
 

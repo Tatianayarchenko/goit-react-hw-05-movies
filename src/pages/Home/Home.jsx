@@ -19,7 +19,7 @@ export const Home = () => {
       async function fetchImages() {
         const data = await getTrendingMovies();
         setFilms(data);
-        console.log(data);
+        // console.log(data);
       }
       fetchImages();
     } catch (error) {

@@ -5,17 +5,20 @@ import { Home } from 'pages/Home/Home';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { MovieDetals } from 'pages/MovieDetals/MovieDetals';
+import { Cast } from 'components/Cast/Cast';
+import { Reviews } from 'components/Reviews/Reviews';
 
 export const App = () => {
   return (
     <>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="movies" element={<Movies />}>
-            {/* <Route path=":movieId" element={<MovieDetals />} /> */}
+          <Route index element={<Home />} />
+          <Route path="movies" element={<Movies />}></Route>
+          <Route path="movies/:movieId" element={<MovieDetals />}>
+            <Route path="cast" element={<Cast />} />
+            <Route path="reviews" element={<Reviews />} />
           </Route>
-          <Route path="movies/:movieId" element={<MovieDetals />} />
         </Route>
       </Routes>
       <ToastContainer autoClose={3000} />

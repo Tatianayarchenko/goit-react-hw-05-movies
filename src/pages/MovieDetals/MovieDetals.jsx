@@ -1,7 +1,13 @@
-import { useParams } from 'react-router-dom';
+import { Outlet, useParams } from 'react-router-dom';
 import { getMovieById } from 'api/api';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import styled from 'styled-components';
+
+const AdditionalInfoLink = styled(NavLink)`
+  display: block;
+`;
 
 export const MovieDetals = () => {
   const { movieId } = useParams();
@@ -12,7 +18,7 @@ export const MovieDetals = () => {
       async function getMovieDetals() {
         const data = await getMovieById(movieId);
         setMovie(data);
-        console.log(data);
+        // console.log(data);
       }
       getMovieDetals();
     } catch (error) {
@@ -34,7 +40,7 @@ export const MovieDetals = () => {
         <h1>{title}</h1>
         <img src={imageUrlPath} alt="title" width="240" />
         <p>
-          <b>User Score</b> {vote_average * 10}%
+          <b>User Score</b> {Math.round(vote_average * 10)}%
         </p>
         <p>
           <b>Overview</b> {overview}
@@ -48,10 +54,15 @@ export const MovieDetals = () => {
         </ul>
         <h2>Additional information</h2>
         <ul>
-          <li>Cast</li>
-          <li>Reviews</li>
+          <AdditionalInfoLink to={`/movies/${movie.id}/cast`}>
+            Cast
+          </AdditionalInfoLink>
+          <AdditionalInfoLink to={`/movies/${movie.id}/reviews`}>
+            Reviews
+          </AdditionalInfoLink>
         </ul>
       </div>
+      <Outlet />
     </div>
   );
 };
