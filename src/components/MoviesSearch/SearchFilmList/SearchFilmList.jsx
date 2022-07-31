@@ -1,9 +1,4 @@
-import { NavLink } from 'react-router-dom';
-import styled from 'styled-components';
-
-const FilmLink = styled(NavLink)`
-  display: block;
-`;
+import { FilmLink } from './SearchFilmsList.styled';
 
 export const SearchFilmsList = ({ films, url, location }) => (
   <ul>
