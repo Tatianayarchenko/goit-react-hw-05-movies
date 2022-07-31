@@ -1,17 +1,11 @@
-import styled from 'styled-components';
 import { getTrendingMovies } from 'api/api';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { TrendingFilms } from 'components/TrendingFilms/TrendingFilms';
+import { toast } from 'react-toastify';
+import { Loading } from 'components/Loader/Loader';
+import { Container, Title } from './HomeStyled';
 
-const Title = styled.h1`
-  font-size: 1.5em;
-  text-align: center;
-  color: palevioletred;
-`;
-
-// Здесь должен идти запрос и рендериться список популярных фильмов
-
-export const Home = () => {
+const Home = () => {
   const [films, setFilms] = useState([]);
 
   useEffect(() => {
@@ -19,18 +13,21 @@ export const Home = () => {
       async function fetchImages() {
         const data = await getTrendingMovies();
         setFilms(data);
-        // console.log(data);
       }
       fetchImages();
     } catch (error) {
-      console.log(error);
+      toast.error('Something went wrong. Please try again.');
     }
   }, []);
 
   return (
-    <div>
+    <Container>
       <Title>Trending movies</Title>
-      <TrendingFilms films={films} />
-    </div>
+      <Suspense fallback={<Loading />}>
+        <TrendingFilms films={films} />
+      </Suspense>
+    </Container>
   );
 };
+
+export default Home;

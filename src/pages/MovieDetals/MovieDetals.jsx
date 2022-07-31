@@ -1,68 +1,55 @@
-import { Outlet, useParams } from 'react-router-dom';
+import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import { getMovieById } from 'api/api';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Loading } from 'components/Loader/Loader';
+import { MovieCard } from 'components/MovieCard/MovieCard';
 
 const AdditionalInfoLink = styled(NavLink)`
   display: block;
 `;
 
-export const MovieDetals = () => {
+const MovieDetals = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
+  const location = useLocation();
+  const backLink = location.state?.from ?? '/';
 
   useEffect(() => {
     try {
       async function getMovieDetals() {
         const data = await getMovieById(movieId);
         setMovie(data);
-        // console.log(data);
       }
       getMovieDetals();
     } catch (error) {
-      console.log(error);
+      toast.error('Something went wrong. Please try again.');
     }
   }, [movieId]);
 
-  if (movie === null) {
-    return;
+  if (!movie) {
+    return null;
   }
-
-  const { title, vote_average, overview, genres, poster_path } = movie;
-
-  const imageUrlPath = `https://image.tmdb.org/t/p/w500${poster_path}`;
 
   return (
     <div>
-      <div>
-        <h1>{title}</h1>
-        <img src={imageUrlPath} alt="title" width="240" />
-        <p>
-          <b>User Score</b> {Math.round(vote_average * 10)}%
-        </p>
-        <p>
-          <b>Overview</b> {overview}
-        </p>
+      <Link to={backLink}>Go back</Link>
+      <MovieCard movie={movie} />
 
-        <b> Genres </b>
-        <ul>
-          {genres.map(genre => (
-            <li key={genre.id}>{genre.name}</li>
-          ))}
-        </ul>
-        <h2>Additional information</h2>
-        <ul>
-          <AdditionalInfoLink to={`/movies/${movie.id}/cast`}>
-            Cast
-          </AdditionalInfoLink>
-          <AdditionalInfoLink to={`/movies/${movie.id}/reviews`}>
-            Reviews
-          </AdditionalInfoLink>
-        </ul>
-      </div>
-      <Outlet />
+      <h2>Additional information</h2>
+      <ul>
+        <AdditionalInfoLink to="cast">Cast</AdditionalInfoLink>
+        <AdditionalInfoLink to="reviews">Reviews</AdditionalInfoLink>
+      </ul>
+
+      <Suspense fallback={<Loading />}>
+        <Outlet />
+      </Suspense>
     </div>
   );
 };
+
+export default MovieDetals;

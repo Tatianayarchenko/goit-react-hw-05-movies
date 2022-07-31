@@ -1,16 +1,20 @@
-import { NavLink } from 'react-router-dom';
-import styled from 'styled-components';
+import { useLocation } from 'react-router-dom';
+import { TrendingFilmLink, TrendingFilmList } from './TrendingFilms.styled';
 
-const TrendingFilmLink = styled(NavLink)`
-  display: block;
-`;
+export const TrendingFilms = ({ films }) => {
+  const location = useLocation();
 
-export const TrendingFilms = ({ films }) => (
-  <ul>
-    {films.map(film => (
-      <TrendingFilmLink to={`/movies/${film.id}`} key={film.id}>
-        {film.title}
-      </TrendingFilmLink>
-    ))}
-  </ul>
-);
+  return (
+    <TrendingFilmList>
+      {films.map(film => (
+        <TrendingFilmLink
+          to={`/movies/${film.id}`}
+          state={{ from: location }}
+          key={film.id}
+        >
+          {film.title}
+        </TrendingFilmLink>
+      ))}
+    </TrendingFilmList>
+  );
+};

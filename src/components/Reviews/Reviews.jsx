@@ -1,38 +1,46 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getReviews } from 'api/api';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-export const Reviews = () => {
+const Reviews = () => {
   const { movieId } = useParams();
-  const [reviewses, setReviewses] = useState(null);
+  const [reviews, setReviews] = useState(null);
 
   useEffect(() => {
     try {
       async function getMovieReviews() {
         const data = await getReviews(movieId);
-        setReviewses(data);
-        console.log(data);
+        setReviews(data);
+        // console.log(data);
       }
       getMovieReviews();
     } catch (error) {
-      console.log(error);
+      toast.error('Something went wrong. Please try again.');
     }
   }, [movieId]);
 
-  if (reviewses === null) {
-    return;
+  if (!reviews) {
+    return null;
+  }
+
+  if (reviews.length === 0) {
+    return <p>We don't have any reviews for this movie.</p>;
   }
 
   return (
     <div>
       <ul>
-        {reviewses.map(reviews => (
-          <li key={reviews.id}>
-            <b>Author: {reviews.author}</b>
-            <p>{reviews.content}</p>
+        {reviews.map(({ id, author, content }) => (
+          <li key={id}>
+            <b>Author: {author}</b>
+            <p>{content}</p>
           </li>
         ))}
       </ul>
     </div>
   );
 };
+
+export default Reviews;

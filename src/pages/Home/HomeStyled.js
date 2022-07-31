@@ -1,0 +1,11 @@
+import styled from 'styled-components';
+
+export const Title = styled.h1`
+  font-size: 1.5em;
+  margin: 0;
+  color: #89495e;
+`;
+
+export const Container = styled.div`
+  padding: 30px;
+`;

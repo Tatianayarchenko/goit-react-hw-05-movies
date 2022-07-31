@@ -5,10 +5,14 @@ const FilmLink = styled(NavLink)`
   display: block;
 `;
 
-export const SearchFilmsList = ({ films }) => (
+export const SearchFilmsList = ({ films, url, location }) => (
   <ul>
     {films.map(film => (
-      <FilmLink to={`${film.id}`} key={film.id}>
+      <FilmLink
+        key={film.id}
+        to={`${url}${film.id}`}
+        state={{ from: location }}
+      >
         {film.title}
       </FilmLink>
     ))}

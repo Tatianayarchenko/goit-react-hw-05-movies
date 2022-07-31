@@ -3,6 +3,7 @@ import { Formik, Field, Form } from 'formik';
 // import PropTypes from 'prop-types';
 // import { Formik } from 'formik';
 import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // import {
 //   SearchFormButton,
 //   HeaderSearchbar,
@@ -41,13 +42,3 @@ export const SearchForm = ({ onSubmit }) => {
     </>
   );
 };
-
-// const handleSubmit = ({ query }) => {
-//     setQuery(query);
-//   };
-
-// export const Searchbar = ({ onSubmit }) => {
-
-// Movies.propTypes = {
-//   onSubmit: PropTypes.func.isRequired,
-// };
