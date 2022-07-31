@@ -14,7 +14,6 @@ const Cast = () => {
       async function getMovieCast() {
         const data = await getCast(movieId);
         setCasts(data);
-        // console.log(data);
       }
       getMovieCast();
     } catch (error) {

@@ -13,7 +13,6 @@ const Reviews = () => {
       async function getMovieReviews() {
         const data = await getReviews(movieId);
         setReviews(data);
-        // console.log(data);
       }
       getMovieReviews();
     } catch (error) {

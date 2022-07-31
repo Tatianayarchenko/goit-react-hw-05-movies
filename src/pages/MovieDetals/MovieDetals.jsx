@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Loading } from 'components/Loader/Loader';
 import { MovieCard } from 'components/MovieCard/MovieCard';
+import { Container, Title } from './MovieDetals.styled';
 
 const AdditionalInfoLink = styled(NavLink)`
   display: block;
@@ -35,11 +36,11 @@ const MovieDetals = () => {
   }
 
   return (
-    <div>
+    <Container>
       <Link to={backLink}>Go back</Link>
       <MovieCard movie={movie} />
 
-      <h2>Additional information</h2>
+      <Title>Additional information</Title>
       <ul>
         <AdditionalInfoLink to="cast">Cast</AdditionalInfoLink>
         <AdditionalInfoLink to="reviews">Reviews</AdditionalInfoLink>
@@ -48,7 +49,7 @@ const MovieDetals = () => {
       <Suspense fallback={<Loading />}>
         <Outlet />
       </Suspense>
-    </div>
+    </Container>
   );
 };
 

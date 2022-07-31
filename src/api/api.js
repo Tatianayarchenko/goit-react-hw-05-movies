@@ -34,7 +34,6 @@ export const getMovieById = async movieId => {
     },
   });
   return response.data;
-  // .find(movie => movie.id === movieId)
 };
 
 export const getCast = async movieId => {
@@ -44,7 +43,7 @@ export const getCast = async movieId => {
       language: 'en-US',
     },
   });
-  // console.log(response);
+
   return response.data.cast;
 };
 
@@ -55,14 +54,6 @@ export const getReviews = async movieId => {
       language: 'en-US',
     },
   });
-  // console.log(response);
+
   return response.data.results;
 };
-
-// const requestPopularFilms =
-//   'https://api.themoviedb.org/3/movie/popular?api_key=1d1120e9d6d730509fa5db5176245d73&language=en-US&page=1';
-
-// /trending/movie/day
-
-// const SearchMoviesURL =
-//   'https://api.themoviedb.org/3/search/movie?api_key=1d1120e9d6d730509fa5db5176245d73&language=en-US&page=1&include_adult=false';
