@@ -1,4 +1,5 @@
 import { FilmLink } from './SearchFilmsList.styled';
+import PropTypes from 'prop-types';
 
 export const SearchFilmsList = ({ films, url, location }) => (
   <ul>
@@ -13,3 +14,9 @@ export const SearchFilmsList = ({ films, url, location }) => (
     ))}
   </ul>
 );
+
+SearchFilmsList.propTypes = {
+  films: PropTypes.array.isRequired,
+  url: PropTypes.string,
+  location: PropTypes.object.isRequired,
+};

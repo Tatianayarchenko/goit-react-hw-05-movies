@@ -1,6 +1,8 @@
 import { Formik, Field, Form } from 'formik';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Container } from './SearchForm.styled';
+import PropTypes from 'prop-types';
 
 const initialValues = {
   searchQuery: '',
@@ -16,7 +18,7 @@ export const SearchForm = ({ onSubmit }) => {
   };
 
   return (
-    <>
+    <Container>
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
         <Form>
           <Field
@@ -29,6 +31,10 @@ export const SearchForm = ({ onSubmit }) => {
           <button type="submit">Search</button>
         </Form>
       </Formik>
-    </>
+    </Container>
   );
+};
+
+SearchForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
 };

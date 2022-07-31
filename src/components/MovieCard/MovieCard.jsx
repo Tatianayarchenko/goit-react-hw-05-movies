@@ -1,5 +1,6 @@
 import defaultImage from 'components/defaultImage/default-profile.jpg';
 import { CardInfo, CardWrap, Title } from './MovieCard.styled';
+import PropTypes from 'prop-types';
 
 export const MovieCard = ({ movie }) => {
   const { title, vote_average, overview, genres, poster_path } = movie;
@@ -30,4 +31,8 @@ export const MovieCard = ({ movie }) => {
       </CardWrap>
     </div>
   );
+};
+
+MovieCard.propTypes = {
+  movie: PropTypes.object.isRequired,
 };

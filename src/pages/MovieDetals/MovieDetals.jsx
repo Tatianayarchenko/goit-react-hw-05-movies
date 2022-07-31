@@ -1,17 +1,11 @@
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import { getMovieById } from 'api/api';
 import { useState, useEffect, Suspense } from 'react';
-import { NavLink } from 'react-router-dom';
-import styled from 'styled-components';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Loading } from 'components/Loader/Loader';
 import { MovieCard } from 'components/MovieCard/MovieCard';
-import { Container, Title } from './MovieDetals.styled';
-
-const AdditionalInfoLink = styled(NavLink)`
-  display: block;
-`;
+import { Container, Title, AdditionalInfoLink } from './MovieDetals.styled';
 
 const MovieDetals = () => {
   const { movieId } = useParams();
@@ -42,8 +36,12 @@ const MovieDetals = () => {
 
       <Title>Additional information</Title>
       <ul>
-        <AdditionalInfoLink to="cast">Cast</AdditionalInfoLink>
-        <AdditionalInfoLink to="reviews">Reviews</AdditionalInfoLink>
+        <AdditionalInfoLink to="cast" state={{ from: location.state.from }}>
+          Cast
+        </AdditionalInfoLink>
+        <AdditionalInfoLink to="reviews" state={{ from: location.state.from }}>
+          Reviews
+        </AdditionalInfoLink>
       </ul>
 
       <Suspense fallback={<Loading />}>
