@@ -1,11 +1,7 @@
-import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import styled from 'styled-components';
 
-export const TrendingFilmList = styled.ul`
-  padding: 0;
-`;
-
-export const TrendingFilmLink = styled(NavLink)`
+export const FilmLink = styled(NavLink)`
   display: block;
   color: #000000;
   text-decoration: none;
@@ -13,4 +9,8 @@ export const TrendingFilmLink = styled(NavLink)`
     color: #bf2155;
     text-decoration: underline;
   }
+`;
+
+export const FilmList = styled.ul`
+  padding: 0;
 `;

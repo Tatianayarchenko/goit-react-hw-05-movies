@@ -1,6 +1,7 @@
-import defaultImage from 'components/defaultImage/default-profile.jpg';
-import { CardInfo, CardWrap, Title } from './MovieCard.styled';
+import defaultImage from 'images/default-profile.jpg';
+import { CardInfo, CardWrap } from './MovieCard.styled';
 import PropTypes from 'prop-types';
+import { SecondaryTitle } from 'components/Titles/SecondaryTitle.styled';
 
 export const MovieCard = ({ movie }) => {
   const { title, vote_average, overview, genres, poster_path } = movie;
@@ -14,7 +15,7 @@ export const MovieCard = ({ movie }) => {
       <CardWrap>
         <img src={imageUrlPath} alt="title" width="240" />
         <CardInfo>
-          <Title>{title}</Title>
+          <SecondaryTitle>{title}</SecondaryTitle>
           <p>
             <b>User Score</b> {Math.round(vote_average * 10)}%
           </p>

@@ -1,11 +1,12 @@
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
-import { getMovieById } from 'api/api';
+import { getMovieById } from 'api/fetchApi';
 import { useState, useEffect, Suspense } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Loading } from 'components/Loader/Loader';
 import { MovieCard } from 'components/MovieCard/MovieCard';
-import { Container, Title, AdditionalInfoLink } from './MovieDetals.styled';
+import { AdditionalInfoLink } from './MovieDetals.styled';
+import { PrimaryTitle } from 'components/Titles/PrimaryTitle.styled';
 
 const MovieDetals = () => {
   const { movieId } = useParams();
@@ -30,11 +31,11 @@ const MovieDetals = () => {
   }
 
   return (
-    <Container>
+    <>
       <Link to={backLink}>Go back</Link>
       <MovieCard movie={movie} />
 
-      <Title>Additional information</Title>
+      <PrimaryTitle>Additional information</PrimaryTitle>
       <ul>
         <AdditionalInfoLink to="cast" state={{ from: location.state.from }}>
           Cast
@@ -47,7 +48,7 @@ const MovieDetals = () => {
       <Suspense fallback={<Loading />}>
         <Outlet />
       </Suspense>
-    </Container>
+    </>
   );
 };
 

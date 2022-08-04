@@ -1,22 +1,21 @@
-import { FilmLink } from './SearchFilmsList.styled';
+import { FilmLink, FilmList } from './MoviesList.styled';
 import PropTypes from 'prop-types';
 
-export const SearchFilmsList = ({ films, url, location }) => (
-  <ul>
+export const MoviesList = ({ films, location }) => (
+  <FilmList>
     {films.map(film => (
       <FilmLink
         key={film.id}
-        to={`${url}${film.id}`}
+        to={`/movies/${film.id}`}
         state={{ from: location }}
       >
         {film.title}
       </FilmLink>
     ))}
-  </ul>
+  </FilmList>
 );
 
-SearchFilmsList.propTypes = {
+MoviesList.propTypes = {
   films: PropTypes.array.isRequired,
-  url: PropTypes.string,
   location: PropTypes.object.isRequired,
 };

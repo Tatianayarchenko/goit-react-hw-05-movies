@@ -2,11 +2,11 @@ import { Loading } from 'components/Loader/Loader';
 import { Suspense } from 'react';
 import { useEffect, useState } from 'react';
 import { useSearchParams, useLocation } from 'react-router-dom';
-import { searchMovies } from 'api/api';
-import { SearchFilmsList } from 'components/MoviesSearch/SearchFilmList/SearchFilmList';
+import { searchMovies } from 'api/fetchApi';
 import { SearchForm } from 'components/MoviesSearch/SearchForm/SearchForm';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { MoviesList } from 'components/MoviesList/MoviesList';
 
 const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -40,11 +40,9 @@ const Movies = () => {
 
   return (
     <>
-      <SearchForm onSubmit={handleSubmit} />
+      <SearchForm value={query} onSubmit={handleSubmit} />
       <Suspense fallback={<Loading />}>
-        {searchFilms && (
-          <SearchFilmsList films={searchFilms} url="" location={location} />
-        )}
+        {searchFilms && <MoviesList films={searchFilms} location={location} />}
       </Suspense>
     </>
   );

@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getReviews } from 'api/api';
+import { getReviews } from 'api/fetchApi';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ReviewsList } from 'components/ReviewsList/ReviewsList';
 
 const Reviews = () => {
   const { movieId } = useParams();
@@ -28,18 +29,7 @@ const Reviews = () => {
     return <p>We don't have any reviews for this movie.</p>;
   }
 
-  return (
-    <div>
-      <ul>
-        {reviews.map(({ id, author, content }) => (
-          <li key={id}>
-            <b>Author: {author}</b>
-            <p>{content}</p>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+  return <ReviewsList reviews={reviews} />;
 };
 
 export default Reviews;

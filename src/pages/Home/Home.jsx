@@ -1,12 +1,13 @@
-import { getTrendingMovies } from 'api/api';
-import { useState, useEffect, Suspense } from 'react';
-import { TrendingFilms } from 'components/TrendingFilms/TrendingFilms';
+import { getTrendingMovies } from 'api/fetchApi';
+import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import { Loading } from 'components/Loader/Loader';
-import { Container, Title } from './HomeStyled';
+import { PrimaryTitle } from 'components/Titles/PrimaryTitle.styled';
+import { MoviesList } from 'components/MoviesList/MoviesList';
+import { useLocation } from 'react-router-dom';
 
 const Home = () => {
   const [films, setFilms] = useState([]);
+  const location = useLocation();
 
   useEffect(() => {
     try {
@@ -21,12 +22,10 @@ const Home = () => {
   }, []);
 
   return (
-    <Container>
-      <Title>Trending movies</Title>
-      <Suspense fallback={<Loading />}>
-        <TrendingFilms films={films} />
-      </Suspense>
-    </Container>
+    <>
+      <PrimaryTitle>Trending movies</PrimaryTitle>
+      <MoviesList films={films} location={location} />
+    </>
   );
 };
 
