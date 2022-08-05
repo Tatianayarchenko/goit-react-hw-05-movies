@@ -1,17 +1,17 @@
 import { lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { SharedLayout } from './layout/SharedLayout';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { NotFound } from 'pages/NotFound/NotFound';
 import { Suspense } from 'react';
 import { Loading } from 'components/Loader/Loader';
 
 const Home = lazy(() => import('./pages/Home/Home'));
 const Movies = lazy(() => import('./pages/Movies/Movies'));
 const MovieDetals = lazy(() => import('./pages/MovieDetals/MovieDetals'));
-const Cast = lazy(() => import('./pages/Casts/Casts'));
-const Reviews = lazy(() => import('./pages/Reviews/Reviews'));
+const Cast = lazy(() => import('./pages/MovieDetals/Casts/Casts'));
+const Reviews = lazy(() => import('./pages/MovieDetals/Reviews/Reviews'));
+const NotFound = lazy(() => import('./pages/NotFound/NotFound'));
+const SharedLayout = lazy(() => import('./layout/SharedLayout'));
 
 export const App = () => {
   return (

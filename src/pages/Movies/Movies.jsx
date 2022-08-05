@@ -3,7 +3,7 @@ import { Suspense } from 'react';
 import { useEffect, useState } from 'react';
 import { useSearchParams, useLocation } from 'react-router-dom';
 import { searchMovies } from 'api/fetchApi';
-import { SearchForm } from 'components/MoviesSearch/SearchForm/SearchForm';
+import { SearchForm } from 'components/SearchForm/SearchForm';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { MoviesList } from 'components/MoviesList/MoviesList';

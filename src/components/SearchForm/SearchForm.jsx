@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PropTypes from 'prop-types';
 
-export const SearchForm = ({ onSubmit }) => {
+export const SearchForm = ({ value, onSubmit }) => {
   const handleSubmit = ({ searchQuery }, { resetForm }) => {
     if (searchQuery.trim() === '') {
       return toast.error('Please, enter a request.');
@@ -14,7 +14,10 @@ export const SearchForm = ({ onSubmit }) => {
 
   return (
     <>
-      <Formik initialValues={{ searchQuery: '' }} onSubmit={handleSubmit}>
+      <Formik
+        initialValues={{ searchQuery: value ?? '' }}
+        onSubmit={handleSubmit}
+      >
         <Form>
           <Field
             type="text"
